@@ -1,0 +1,31 @@
+AppBundle\Entity\Post:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\PostRepository
+    manyToOne:
+        category:
+            targetEntity: DictionaryItem
+        author:
+            targetEntity: Person
+            cascade: ['persist']
+    oneToMany:
+        comments:
+            targetEntity: Comment
+            mappedBy: post
+            cascade: ['persist']
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        createDate:
+            type: datetime
+            column: create_date
+        content:
+            type: text
+        title:
+            type: string
+            length: '255'
+    lifecycleCallbacks: {  }

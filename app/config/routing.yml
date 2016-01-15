@@ -1,0 +1,15 @@
+app_default_posts_native:
+    path: /post/native
+    defaults:  { _controller: app.controller.default:getPostNative }
+
+app_default_posts:
+    path: /post
+    defaults:  { _controller: app.controller.default:getPostSimpleAction }
+
+app_default_posts_json:
+    path: /post.json
+    defaults:  { _controller: app.controller.default:getPostJsonAction }
+
+app_default_posts_simple:
+    path: /post/simple.json
+    defaults:  { _controller: app.controller.default:getPostJsonSimpleAction }

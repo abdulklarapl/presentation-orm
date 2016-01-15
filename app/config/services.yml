@@ -1,0 +1,29 @@
+parameters:
+  app.post.repository.class: AppBundle\Repository\PostRepository
+  app.repository.argument.post: AppBundle:Post
+
+  app.controller.default.class: AppBundle\Controller\DefaultController
+  app.listener.view.class: AppBundle\EventListener\ViewListener
+
+services:
+    app.post.repository:
+        class: %app.post.repository.class%
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method:  getRepository
+        arguments:
+            - %app.repository.argument.post%
+        calls:
+            - [setSerializer, [@jms_serializer]]
+
+    app.controller.default:
+        class: %app.controller.default.class%
+        calls:
+            - [setSerializer, [@jms_serializer]]
+            - [setContainer, [@service_container]]
+            - [setPostRepository, [@app.post.repository]]
+
+    app.listener.view:
+        class: %app.listener.view.class%
+        arguments: [@jms_serializer]
+        tags:
+            - { name: kernel.event_listener, event: kernel.view, method: onKernelView }

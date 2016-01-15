@@ -1,0 +1,17 @@
+AppBundle\Entity\DictionaryItem:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\DictionaryItemRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        code:
+            type: string
+            length: 255
+        value:
+            type: text
+    lifecycleCallbacks: {  }
